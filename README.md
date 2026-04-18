@@ -46,11 +46,12 @@ title: '你的标题'
 description: '一句简介'
 pubDate: '2026-04-18'
 updatedDate: '2026-04-18'
-heroImage: '../../assets/blog-placeholder-1.jpg'
 ---
 
 正文内容...
 ```
+
+`heroImage` 是可选字段；不填就不会显示封面图，也不会使用模板默认图。
 
 ## Deploy (GitHub Pages)
 
