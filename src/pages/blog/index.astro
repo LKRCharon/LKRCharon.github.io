@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
+import { tagToSlug } from '../../utils/tags';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -38,8 +39,7 @@ const posts = (await getCollection('blog')).sort(
 				border-radius: 10px;
 				padding: 0.85rem 1rem;
 			}
-			.post-card a {
-				display: block;
+			.title-link {
 				text-decoration: none;
 			}
 			.title {
@@ -51,7 +51,27 @@ const posts = (await getCollection('blog')).sort(
 				margin: 0.35rem 0 0 0;
 				color: rgb(var(--gray));
 			}
-			.post-card a:hover .title {
+			.title-link:hover .title {
+				color: var(--accent);
+			}
+			.tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.4rem;
+				margin-top: 0.55rem;
+			}
+			.tag {
+				display: inline-block;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 999px;
+				padding: 0.15rem 0.5rem;
+				font-size: 0.8rem;
+				color: rgb(var(--gray-dark));
+				background: #fff;
+				text-decoration: none;
+			}
+			.tag:hover {
+				border-color: var(--accent);
 				color: var(--accent);
 			}
 			@media (max-width: 720px) {
@@ -71,12 +91,23 @@ const posts = (await getCollection('blog')).sort(
 					{
 						posts.map((post) => (
 							<li class="post-card">
-								<a href={`/blog/${post.id}/`}>
+								<a class="title-link" href={`/blog/${post.id}/`}>
 									<h4 class="title">{post.data.title}</h4>
 									<p class="date">
 										<FormattedDate date={post.data.pubDate} />
 									</p>
 								</a>
+								{
+									post.data.tags.length > 0 && (
+										<div class="tags">
+											{post.data.tags.map((tag) => (
+												<a class="tag" href={`/tags/${tagToSlug(tag)}/`}>
+													#{tag}
+												</a>
+											))}
+										</div>
+									)
+								}
 							</li>
 						))
 					}

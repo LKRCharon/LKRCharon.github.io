@@ -46,12 +46,16 @@ title: '你的标题'
 description: '一句简介'
 pubDate: '2026-04-18'
 updatedDate: '2026-04-18'
+tags:
+  - astro
+  - 建站
 ---
 
 正文内容...
 ```
 
 `heroImage` 是可选字段；不填就不会显示封面图，也不会使用模板默认图。
+`tags` 也是可选字段，推荐每篇写 2-5 个，方便后续检索和归档。
 
 ## Deploy (GitHub Pages)
 

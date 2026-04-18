@@ -3,6 +3,10 @@ title: 'hexopages-from0'
 description: '早期记录：从 0 开始搭建 Hexo Pages。'
 pubDate: '2023-01-23'
 updatedDate: '2023-01-23'
+tags:
+  - 建站
+  - Hexo
+  - GitHub Pages
 ---
 
 这是一篇早期的建站记录草稿，主要包含两个步骤：

@@ -1,0 +1,110 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_TITLE } from '../../consts';
+import { type CollectionEntry, getCollection } from 'astro:content';
+import { normalizeTag, tagToSlug } from '../../utils/tags';
+
+interface TagPageProps {
+	tag: string;
+	posts: CollectionEntry<'blog'>[];
+}
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	const byTag = new Map<string, CollectionEntry<'blog'>[]>();
+
+	for (const post of posts) {
+		for (const rawTag of post.data.tags) {
+			const tag = normalizeTag(rawTag);
+			if (!tag) continue;
+			const list = byTag.get(tag) ?? [];
+			list.push(post);
+			byTag.set(tag, list);
+		}
+	}
+
+	return [...byTag.entries()].map(([tag, relatedPosts]) => ({
+		params: { tag: tagToSlug(tag) },
+		props: {
+			tag,
+			posts: relatedPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+		},
+	}));
+}
+
+const { tag, posts } = Astro.props as TagPageProps;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`#${tag} | ${SITE_TITLE}`} description={`Posts tagged with ${tag}`} />
+		<style>
+			main {
+				max-width: 840px;
+			}
+			.page-subtitle {
+				margin: 0 0 1.5rem 0;
+				color: rgb(var(--gray));
+			}
+			.back-link {
+				display: inline-block;
+				margin-bottom: 1rem;
+				font-size: 0.95rem;
+			}
+			.post-list {
+				display: grid;
+				gap: 0.8rem;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			.post-card {
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 10px;
+				padding: 0.85rem 1rem;
+			}
+			.title-link {
+				text-decoration: none;
+			}
+			.title {
+				margin: 0;
+				color: rgb(var(--black));
+				line-height: 1.3;
+			}
+			.date {
+				margin: 0.35rem 0 0 0;
+				color: rgb(var(--gray));
+			}
+			.title-link:hover .title {
+				color: var(--accent);
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<a class="back-link" href="/tags">← All tags</a>
+			<h1>#{tag}</h1>
+			<p class="page-subtitle">{posts.length} posts</p>
+			<ul class="post-list">
+				{
+					posts.map((post) => (
+						<li class="post-card">
+							<a class="title-link" href={`/blog/${post.id}/`}>
+								<h4 class="title">{post.data.title}</h4>
+								<p class="date">
+									<FormattedDate date={post.data.pubDate} />
+								</p>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
