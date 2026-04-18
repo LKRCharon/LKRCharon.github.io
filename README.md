@@ -1,68 +1,89 @@
-# Astro Starter Kit: Blog
+# LKRCharon Blog
 
-```sh
-npm create astro@latest -- --template blog
-```
+基于 Astro 6 构建的个人博客，当前部署在 GitHub Pages：
+
+- 线上地址：[https://lkrcharon.github.io](https://lkrcharon.github.io)
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
 [![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Tech Stack
 
-![blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
+- Astro `6.1.7`
+- MDX (`@astrojs/mdx`)
+- RSS (`@astrojs/rss`)
+- Sitemap (`@astrojs/sitemap`)
+- Tailwind CSS 4 (`tailwindcss` + `@tailwindcss/vite`)
 
-Features:
+## Local Development
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+```bash
+npm install
+npm run dev
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+本地开发地址默认是 `http://localhost:4321`。
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Build & Preview
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+```bash
+npm run build
+npm run preview
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+构建产物位于 `dist/`。
 
-## 🧞 Commands
+## Write a New Post
 
-All commands are run from the root of the project, from a terminal:
+在 `src/content/blog/` 下新建 `.md` 或 `.mdx` 文件。
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+示例 frontmatter：
 
-## 👀 Want to learn more?
+```md
+---
+title: '你的标题'
+description: '一句简介'
+pubDate: '2026-04-18'
+updatedDate: '2026-04-18'
+heroImage: '../../assets/blog-placeholder-1.jpg'
+---
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+正文内容...
+```
 
-## Credit
+## Deploy (GitHub Pages)
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+项目已配置 GitHub Actions 自动部署：
+
+- 工作流文件：`.github/workflows/deploy.yml`
+- 触发方式：推送到 `main` 分支
+- 发布目录：`dist/`（由 Action 构建后上传）
+
+如果是首次接入，请确认仓库设置：
+
+1. `Settings -> Pages`
+2. `Build and deployment` 选择 `GitHub Actions`
+
+## Project Structure
+
+```text
+.
+├── public/
+├── src/
+│   ├── components/
+│   ├── content/
+│   │   └── blog/
+│   ├── layouts/
+│   ├── pages/
+│   └── styles/
+├── .github/workflows/deploy.yml
+├── astro.config.mjs
+├── package.json
+└── README.md
+```
+
+## Notes
+
+- 站点根地址在 `astro.config.mjs` 的 `site` 字段中维护。
+- 若后续要绑定自定义域名，可在仓库根目录新增 `public/CNAME`。
