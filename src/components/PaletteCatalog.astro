@@ -1,0 +1,102 @@
+---
+import type { PaletteSection } from '../data/liuzhaoze-palettes';
+
+interface Props {
+	sections: PaletteSection[];
+}
+
+const { sections } = Astro.props;
+---
+
+<div class="palette-catalog">
+	{
+		sections.map((section) => (
+			<section class="palette-section">
+				<h2>{section.title}</h2>
+				<div class="group-list">
+					{section.groups.map((group) => (
+						<article class="group-card">
+							<h3>{group.title}</h3>
+							<div class="palette-list">
+								{group.palettes.map((palette) => (
+									<div class="palette-row">
+										<div class="chips">
+											{palette.map((hex) => (
+												<span class="chip" style={`background:${hex};`} title={hex} />
+											))}
+										</div>
+										<p class="hex-list">{palette.join(' / ')}</p>
+									</div>
+								))}
+							</div>
+						</article>
+					))}
+				</div>
+			</section>
+		))
+	}
+</div>
+
+<style>
+	.palette-catalog {
+		display: grid;
+		gap: 1.5rem;
+	}
+	.palette-section {
+		border-top: 1px solid rgb(var(--gray-light));
+		padding-top: 1.2rem;
+	}
+	.palette-section h2 {
+		margin-bottom: 0.8rem;
+	}
+	.group-list {
+		display: grid;
+		gap: 0.8rem;
+	}
+	.group-card {
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 12px;
+		padding: 0.8rem;
+		background: #fff;
+	}
+	.group-card h3 {
+		margin-bottom: 0.7rem;
+		font-size: 1rem;
+	}
+	.palette-list {
+		display: grid;
+		gap: 0.65rem;
+	}
+	.palette-row {
+		display: grid;
+		gap: 0.4rem;
+	}
+	.chips {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(58px, 1fr));
+		gap: 0.4rem;
+	}
+	.chip {
+		display: block;
+		border-radius: 8px;
+		height: 26px;
+		border: 1px solid rgba(0, 0, 0, 0.08);
+	}
+	.hex-list {
+		margin: 0;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.82rem;
+		color: rgb(var(--gray));
+	}
+	@media (max-width: 720px) {
+		.group-card {
+			padding: 0.72rem;
+		}
+		.chips {
+			grid-template-columns: repeat(auto-fit, minmax(52px, 1fr));
+		}
+		.chip {
+			height: 24px;
+		}
+	}
+</style>
