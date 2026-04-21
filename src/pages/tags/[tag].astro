@@ -47,7 +47,7 @@ const { tag, posts } = Astro.props as TagPageProps;
 	<body>
 		<Header />
 		<main class="page-shell space-y-6">
-			<section class="surface-panel p-6 sm:p-8">
+			<section class="border-y border-line-soft/80 py-8 sm:py-10">
 				<a class="inline-flex items-center gap-2 text-sm font-medium text-muted transition hover:text-text" href="/tags">
 					<span aria-hidden="true">←</span>
 					All tags
@@ -62,10 +62,10 @@ const { tag, posts } = Astro.props as TagPageProps;
 					<span class="meta-pill">{posts.length} posts</span>
 				</div>
 			</section>
-			<ul class="grid list-none gap-4 p-0">
+			<ul class="list-none divide-y divide-line-soft border-y border-line-soft p-0">
 				{
 					posts.map((post) => (
-						<li class="surface-card surface-card-interactive p-5 sm:p-6">
+						<li class="py-6 sm:py-7">
 							<a class="group block space-y-4" href={`/blog/${post.id}/`}>
 								<span class="meta-pill">
 									<FormattedDate date={post.data.pubDate} />

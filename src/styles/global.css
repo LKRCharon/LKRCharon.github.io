@@ -296,71 +296,8 @@ html[data-font-style='apple'] {
 	border: 0;
 }
 
-.tag-badge {
-	--tag-badge-bg: #efefef;
-	--tag-badge-fg: #52525b;
-	--tag-badge-border: #e2e2e2;
-	display: inline-flex;
-	align-items: center;
-	gap: 0.42rem;
-	padding: 0.42rem 0.8rem;
-	border: 1px solid var(--tag-badge-border);
-	border-radius: 999px;
-	background: var(--tag-badge-bg);
-	color: var(--tag-badge-fg);
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
-	font-family: var(--font-heading);
-	font-size: 0.82rem;
-	font-weight: 600;
-	line-height: 1;
-	letter-spacing: -0.015em;
-	text-decoration: none;
-	transition:
-		transform 180ms ease,
-		box-shadow 180ms ease,
-		filter 180ms ease;
-}
-
-.tag-badge:hover {
-	color: var(--tag-badge-fg);
-	transform: translateY(-1px);
-	box-shadow:
-		inset 0 1px 0 rgba(255, 255, 255, 0.65),
-		0 12px 22px -18px color-mix(in srgb, var(--tag-badge-fg) 60%, transparent);
-	filter: saturate(1.02);
-}
-
-.tag-badge--md {
-	padding: 0.48rem 0.92rem;
-	font-size: 0.88rem;
-}
-
-.tag-badge__count {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	min-width: 1.4rem;
-	padding: 0.18rem 0.36rem;
-	border-radius: 999px;
-	background: color-mix(in srgb, var(--tag-badge-fg) 10%, white 74%);
-	color: color-mix(in srgb, var(--tag-badge-fg) 88%, black 12%);
-	font-size: 0.72rem;
-	font-weight: 700;
-	line-height: 1;
-}
-
 @media (max-width: 720px) {
 	body {
 		font-size: var(--font-body-size-mobile);
-	}
-
-	.tag-badge {
-		padding: 0.36rem 0.72rem;
-		font-size: 0.79rem;
-	}
-
-	.tag-badge--md {
-		padding: 0.42rem 0.82rem;
-		font-size: 0.84rem;
 	}
 }
