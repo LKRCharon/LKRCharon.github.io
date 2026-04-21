@@ -1,0 +1,20 @@
+---
+import { getTagBadgeStyle, tagToSlug } from '../utils/tags';
+
+interface Props {
+	tag: string;
+	count?: number;
+	href?: string;
+	showHash?: boolean;
+	size?: 'sm' | 'md';
+}
+
+const { tag, count, href = `/tags/${tagToSlug(tag)}/`, showHash = true, size = 'sm' } = Astro.props;
+const label = showHash ? `#${tag}` : tag;
+const style = getTagBadgeStyle(tag);
+---
+
+<a class={`tag-badge tag-badge--${size}`} href={href} style={style}>
+	<span class="tag-badge__label">{label}</span>
+	{count !== undefined && <span class="tag-badge__count">{count}</span>}
+</a>

@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { SITE_TITLE } from '../../consts';
 import { getCollection } from 'astro:content';
+import TagBadge from '../../components/TagBadge.astro';
 import { normalizeTag, tagToSlug } from '../../utils/tags';
 
 const posts = await getCollection('blog');
@@ -43,23 +44,7 @@ const tags = [...tagCounts.entries()]
 				gap: 0.6rem;
 			}
 			.tag-link {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.4rem;
-				border: 1px solid rgb(var(--gray-light));
-				border-radius: 999px;
-				padding: 0.35rem 0.7rem;
-				text-decoration: none;
-				color: rgb(var(--gray-dark));
-				background: #fff;
-			}
-			.tag-link:hover {
-				border-color: var(--accent);
-				color: var(--accent);
-			}
-			.count {
-				font-size: 0.8rem;
-				color: rgb(var(--gray));
+				display: flex;
 			}
 		</style>
 	</head>
@@ -73,10 +58,7 @@ const tags = [...tagCounts.entries()]
 					<ul class="tag-list">
 						{tags.map((item) => (
 							<li>
-								<a class="tag-link" href={`/tags/${item.slug}/`}>
-									<span>#{item.tag}</span>
-									<span class="count">{item.count}</span>
-								</a>
+								<TagBadge tag={item.tag} href={`/tags/${item.slug}/`} count={item.count} />
 							</li>
 						))}
 					</ul>

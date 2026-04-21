@@ -3,9 +3,9 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import TagBadge from '../components/TagBadge.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
-import { tagToSlug } from '../utils/tags';
 
 const posts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -63,19 +63,6 @@ const posts = (await getCollection('blog'))
 				gap: 0.4rem;
 				margin-top: 0.55rem;
 			}
-			.tag {
-				display: inline-block;
-				border: 1px solid rgb(var(--gray-light));
-				border-radius: 999px;
-				padding: 0.15rem 0.5rem;
-				font-size: 0.8rem;
-				color: rgb(var(--gray-dark));
-				background: #fff;
-			}
-			.tag:hover {
-				border-color: var(--accent);
-				color: var(--accent);
-			}
 			.more {
 				margin-top: 1.5rem;
 			}
@@ -102,9 +89,7 @@ const posts = (await getCollection('blog'))
 								post.data.tags.length > 0 && (
 									<div class="tags">
 										{post.data.tags.map((tag) => (
-											<a class="tag" href={`/tags/${tagToSlug(tag)}/`}>
-												#{tag}
-											</a>
+											<TagBadge tag={tag} />
 										))}
 									</div>
 								)

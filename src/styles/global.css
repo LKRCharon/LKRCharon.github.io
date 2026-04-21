@@ -15,6 +15,36 @@
 	--box-shadow:
 		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
 		0 16px 32px rgba(var(--gray), 33%);
+	--font-body: 'Atkinson', sans-serif;
+	--font-heading: 'Atkinson', sans-serif;
+	--font-body-size: 17px;
+	--font-body-size-mobile: 16px;
+	--font-body-line-height: 1.65;
+	--font-body-letter-spacing: normal;
+	--font-heading-weight: 700;
+	--font-heading-letter-spacing: normal;
+	--font-size-h1: 2.1rem;
+	--font-size-h2: 1.65rem;
+	--font-size-h3: 1.35rem;
+	--font-size-h4: 1.15rem;
+}
+
+html[data-font-style='apple'] {
+	--font-body:
+		'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+		'PingFang SC', 'Microsoft YaHei', sans-serif;
+	--font-heading:
+		'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+		'PingFang SC', 'Microsoft YaHei', sans-serif;
+	--font-body-size: 17px;
+	--font-body-line-height: 1.55;
+	--font-body-letter-spacing: -0.01em;
+	--font-heading-weight: 600;
+	--font-heading-letter-spacing: -0.015em;
+	--font-size-h1: 2.2rem;
+	--font-size-h2: 1.75rem;
+	--font-size-h3: 1.4rem;
+	--font-size-h4: 1.2rem;
 }
 @font-face {
 	font-family: 'Atkinson';
@@ -31,7 +61,7 @@
 	font-display: swap;
 }
 body {
-	font-family: 'Atkinson', sans-serif;
+	font-family: var(--font-body);
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -40,8 +70,9 @@ body {
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
-	font-size: 17px;
-	line-height: 1.65;
+	font-size: var(--font-body-size);
+	line-height: var(--font-body-line-height);
+	letter-spacing: var(--font-body-letter-spacing);
 }
 main {
 	width: 760px;
@@ -58,18 +89,21 @@ h6 {
 	margin: 0 0 0.5rem 0;
 	color: rgb(var(--black));
 	line-height: 1.2;
+	font-family: var(--font-heading);
+	font-weight: var(--font-heading-weight);
+	letter-spacing: var(--font-heading-letter-spacing);
 }
 h1 {
-	font-size: 2.1rem;
+	font-size: var(--font-size-h1);
 }
 h2 {
-	font-size: 1.65rem;
+	font-size: var(--font-size-h2);
 }
 h3 {
-	font-size: 1.35rem;
+	font-size: var(--font-size-h3);
 }
 h4 {
-	font-size: 1.15rem;
+	font-size: var(--font-size-h4);
 }
 h5 {
 	font-size: 1.25em;
@@ -129,7 +163,7 @@ hr {
 }
 @media (max-width: 720px) {
 	body {
-		font-size: 16px;
+		font-size: var(--font-body-size-mobile);
 	}
 	main {
 		padding: 1rem 0.9rem;
@@ -152,4 +186,67 @@ hr {
 	clip-path: inset(50%);
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+.tag-badge {
+	--tag-badge-bg: #efefef;
+	--tag-badge-fg: #52525b;
+	--tag-badge-border: #e2e2e2;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.42rem;
+	padding: 0.34rem 0.72rem;
+	border-radius: 0.85rem;
+	border: 1px solid var(--tag-badge-border);
+	background: var(--tag-badge-bg);
+	color: var(--tag-badge-fg);
+	text-decoration: none;
+	font-family: var(--font-heading);
+	font-size: 0.84rem;
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: -0.01em;
+	transition:
+		transform 180ms ease,
+		box-shadow 180ms ease,
+		filter 180ms ease;
+}
+
+.tag-badge:hover {
+	color: var(--tag-badge-fg);
+	transform: translateY(-1px);
+	box-shadow: 0 10px 20px -16px color-mix(in srgb, var(--tag-badge-fg) 60%, transparent);
+	filter: saturate(1.04);
+}
+
+.tag-badge--md {
+	padding: 0.42rem 0.82rem;
+	font-size: 0.9rem;
+	border-radius: 0.95rem;
+}
+
+.tag-badge__count {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 1.35rem;
+	padding: 0.18rem 0.38rem;
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--tag-badge-fg) 10%, white 70%);
+	color: color-mix(in srgb, var(--tag-badge-fg) 88%, black 12%);
+	font-size: 0.72rem;
+	font-weight: 700;
+	line-height: 1;
+}
+
+@media (max-width: 720px) {
+	.tag-badge {
+		padding: 0.32rem 0.66rem;
+		font-size: 0.8rem;
+	}
+
+	.tag-badge--md {
+		padding: 0.38rem 0.75rem;
+		font-size: 0.86rem;
+	}
 }

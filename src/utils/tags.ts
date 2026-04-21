@@ -5,3 +5,5 @@ export function normalizeTag(tag: string): string {
 export function tagToSlug(tag: string): string {
 	return normalizeTag(tag).toLowerCase().replace(/\s+/g, '-');
 }
+
+export { getTagBadgeStyle } from './tagBadge';
