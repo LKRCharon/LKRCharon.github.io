@@ -1,32 +1,32 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
+@import "tailwindcss";
 
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
 	--font-body: 'Atkinson', sans-serif;
 	--font-heading: 'Atkinson', sans-serif;
 	--font-body-size: 17px;
 	--font-body-size-mobile: 16px;
-	--font-body-line-height: 1.65;
-	--font-body-letter-spacing: normal;
+	--font-body-line-height: 1.7;
+	--font-body-letter-spacing: -0.005em;
 	--font-heading-weight: 700;
-	--font-heading-letter-spacing: normal;
-	--font-size-h1: 2.1rem;
-	--font-size-h2: 1.65rem;
-	--font-size-h3: 1.35rem;
-	--font-size-h4: 1.15rem;
+	--font-heading-letter-spacing: -0.02em;
+	--font-size-h1: clamp(2.35rem, 5vw, 3.6rem);
+	--font-size-h2: clamp(1.75rem, 3.4vw, 2.45rem);
+	--font-size-h3: clamp(1.35rem, 2.3vw, 1.8rem);
+	--font-size-h4: clamp(1.08rem, 1.8vw, 1.3rem);
+}
+
+@theme {
+	--color-canvas: #f6f7fb;
+	--color-mist: #eef2f8;
+	--color-surface: #ffffff;
+	--color-surface-soft: #f8faff;
+	--color-line: #d8dfeb;
+	--color-line-soft: #e6ebf3;
+	--color-text: #1f2937;
+	--color-muted: #677489;
+	--color-subtle: #8b97aa;
+	--color-accent: #3656d4;
+	--color-accent-strong: #2841aa;
 }
 
 html[data-font-style='apple'] {
@@ -37,15 +37,16 @@ html[data-font-style='apple'] {
 		'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
 		'PingFang SC', 'Microsoft YaHei', sans-serif;
 	--font-body-size: 17px;
-	--font-body-line-height: 1.55;
+	--font-body-line-height: 1.6;
 	--font-body-letter-spacing: -0.01em;
 	--font-heading-weight: 600;
-	--font-heading-letter-spacing: -0.015em;
-	--font-size-h1: 2.2rem;
-	--font-size-h2: 1.75rem;
-	--font-size-h3: 1.4rem;
-	--font-size-h4: 1.2rem;
+	--font-heading-letter-spacing: -0.03em;
+	--font-size-h1: clamp(2.45rem, 5vw, 3.75rem);
+	--font-size-h2: clamp(1.9rem, 3.5vw, 2.6rem);
+	--font-size-h3: clamp(1.45rem, 2.4vw, 1.9rem);
+	--font-size-h4: clamp(1.15rem, 1.9vw, 1.35rem);
 }
+
 @font-face {
 	font-family: 'Atkinson';
 	src: url('/fonts/atkinson-regular.woff') format('woff');
@@ -53,6 +54,7 @@ html[data-font-style='apple'] {
 	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: 'Atkinson';
 	src: url('/fonts/atkinson-bold.woff') format('woff');
@@ -60,132 +62,238 @@ html[data-font-style='apple'] {
 	font-style: normal;
 	font-display: swap;
 }
-body {
-	font-family: var(--font-body);
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 320px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: var(--font-body-size);
-	line-height: var(--font-body-line-height);
-	letter-spacing: var(--font-body-letter-spacing);
-}
-main {
-	width: 760px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 2rem 1rem;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-	font-family: var(--font-heading);
-	font-weight: var(--font-heading-weight);
-	letter-spacing: var(--font-heading-letter-spacing);
-}
-h1 {
-	font-size: var(--font-size-h1);
-}
-h2 {
-	font-size: var(--font-size-h2);
-}
-h3 {
-	font-size: var(--font-size-h3);
-}
-h4 {
-	font-size: var(--font-size-h4);
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
-	font-weight: 700;
-}
-a {
-	color: var(--accent);
-}
-a:hover {
-	color: var(--accent);
-}
-p {
-	margin-bottom: 1em;
-}
-.prose p {
-	margin-bottom: 1.3em;
-}
-textarea {
-	width: 100%;
-	font-size: 16px;
-}
-input {
-	font-size: 16px;
-}
-table {
-	width: 100%;
-}
-img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
-}
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
-}
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-}
-pre > code {
-	all: unset;
-}
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.05rem;
-}
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
-}
-@media (max-width: 720px) {
-	body {
-		font-size: var(--font-body-size-mobile);
+
+@layer base {
+	html {
+		background: var(--color-canvas);
+		color: var(--color-text);
 	}
-	main {
-		padding: 1rem 0.9rem;
+
+	body {
+		min-height: 100vh;
+		margin: 0;
+		background:
+			radial-gradient(circle at top, rgba(255, 255, 255, 0.96) 0, rgba(255, 255, 255, 0.65) 18%, transparent 42%),
+			linear-gradient(180deg, var(--color-mist) 0%, var(--color-canvas) 28%, #f8f9fc 100%);
+		color: var(--color-text);
+		font-family: var(--font-body);
+		font-size: var(--font-body-size);
+		line-height: var(--font-body-line-height);
+		letter-spacing: var(--font-body-letter-spacing);
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+		text-align: left;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin: 0;
+		color: var(--color-text);
+		font-family: var(--font-heading);
+		font-weight: var(--font-heading-weight);
+		line-height: 1.08;
+		letter-spacing: var(--font-heading-letter-spacing);
+		text-wrap: balance;
+	}
+
+	h1 {
+		font-size: var(--font-size-h1);
+	}
+
+	h2 {
+		font-size: var(--font-size-h2);
+	}
+
+	h3 {
+		font-size: var(--font-size-h3);
+	}
+
+	h4 {
+		font-size: var(--font-size-h4);
+	}
+
+	p {
+		margin: 0;
+	}
+
+	strong,
+	b {
+		font-weight: 700;
+	}
+
+	a {
+		color: var(--color-accent);
+		text-decoration: none;
+		transition:
+			color 180ms ease,
+			background-color 180ms ease,
+			border-color 180ms ease,
+			transform 180ms ease,
+			box-shadow 180ms ease;
+	}
+
+	a:hover {
+		color: var(--color-accent-strong);
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+		border-radius: 1rem;
+	}
+
+	code {
+		padding: 0.18rem 0.38rem;
+		border: 1px solid color-mix(in srgb, var(--color-line) 88%, white 12%);
+		border-radius: 0.6rem;
+		background: #f4f7fc;
+		font-size: 0.92em;
+	}
+
+	pre {
+		overflow-x: auto;
+		padding: 1.15rem 1.2rem;
+		border: 1px solid color-mix(in srgb, var(--color-line) 90%, white 10%);
+		border-radius: 1.2rem;
+		background: #f3f6fb;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+	}
+
+	pre > code {
+		padding: 0;
+		border: 0;
+		background: transparent;
+	}
+
+	blockquote {
+		margin: 0;
+		padding: 0.15rem 0 0.15rem 1.15rem;
+		border-left: 3px solid color-mix(in srgb, var(--color-accent) 45%, white 55%);
+		color: var(--color-muted);
+	}
+
+	hr {
+		border: none;
+		border-top: 1px solid color-mix(in srgb, var(--color-line) 88%, white 12%);
+	}
+
+	::selection {
+		background: color-mix(in srgb, var(--color-accent) 18%, white 82%);
+		color: var(--color-text);
+	}
+}
+
+@layer components {
+	.page-shell {
+		@apply mx-auto w-full max-w-6xl px-4 pb-16 pt-8 sm:px-6 lg:px-8;
+	}
+
+	.page-shell-narrow {
+		@apply mx-auto w-full max-w-4xl px-4 pb-16 pt-8 sm:px-6 lg:px-8;
+	}
+
+	.surface-panel {
+		@apply rounded-[1.6rem] border border-line/80 bg-white/88 shadow-[0_28px_70px_-42px_rgba(31,41,55,0.28)];
+	}
+
+	.surface-card {
+		@apply rounded-[1.25rem] border border-line/80 bg-white/88 shadow-[0_20px_48px_-38px_rgba(31,41,55,0.24)];
+	}
+
+	.surface-card-interactive {
+		@apply transition duration-200 hover:-translate-y-0.5 hover:border-line hover:shadow-[0_28px_52px_-36px_rgba(31,41,55,0.26)];
+	}
+
+	.eyebrow {
+		@apply text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-subtle;
+	}
+
+	.section-heading {
+		@apply text-3xl font-semibold tracking-[-0.04em] text-text sm:text-4xl;
+	}
+
+	.section-subtitle {
+		@apply max-w-2xl text-base leading-7 text-muted sm:text-[1.05rem];
+	}
+
+	.meta-pill {
+		@apply inline-flex items-center rounded-full border border-line-soft bg-surface-soft px-3 py-1.5 text-xs font-medium text-muted;
+	}
+
+	.text-link-chip {
+		@apply inline-flex items-center justify-center rounded-xl border border-line-soft bg-white px-4 py-2 text-sm font-medium text-text shadow-[0_10px_24px_-20px_rgba(31,41,55,0.3)] transition hover:-translate-y-0.5 hover:border-line hover:text-text;
+	}
+
+	.text-link-chip--accent {
+		@apply border-accent/15 bg-accent text-white shadow-[0_14px_28px_-20px_rgba(54,86,212,0.5)] hover:bg-accent-strong hover:text-white;
+	}
+
+	.prose-content {
+		@apply text-[1rem] leading-8 text-text sm:text-[1.02rem];
+	}
+
+	.prose-content > * + * {
+		margin-top: 1.35rem;
+	}
+
+	.prose-content h2 {
+		@apply mt-10 text-[1.7rem] font-semibold tracking-[-0.03em] text-text sm:text-[1.95rem];
+	}
+
+	.prose-content h3 {
+		@apply mt-8 text-[1.3rem] font-semibold tracking-[-0.025em] text-text sm:text-[1.48rem];
+	}
+
+	.prose-content h4 {
+		@apply mt-7 text-[1.1rem] font-semibold tracking-[-0.02em] text-text sm:text-[1.2rem];
+	}
+
+	.prose-content p,
+	.prose-content li {
+		@apply text-muted;
+	}
+
+	.prose-content ul,
+	.prose-content ol {
+		@apply pl-6;
+	}
+
+	.prose-content li + li {
+		margin-top: 0.55rem;
+	}
+
+	.prose-content a {
+		@apply font-medium text-accent underline decoration-accent/30 underline-offset-4 hover:text-accent-strong;
+	}
+
+	.prose-content table {
+		@apply w-full border-collapse overflow-hidden rounded-[1rem];
+	}
+
+	.prose-content th,
+	.prose-content td {
+		@apply border border-line-soft px-4 py-3 text-left;
+	}
+
+	.prose-content th {
+		@apply bg-surface-soft font-semibold text-text;
 	}
 }
 
 .sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
 	position: absolute !important;
-	height: 1px;
 	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
 	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
+	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
+	border: 0;
 }
 
 .tag-badge {
@@ -195,17 +303,18 @@ hr {
 	display: inline-flex;
 	align-items: center;
 	gap: 0.42rem;
-	padding: 0.34rem 0.72rem;
-	border-radius: 0.85rem;
+	padding: 0.42rem 0.8rem;
 	border: 1px solid var(--tag-badge-border);
+	border-radius: 999px;
 	background: var(--tag-badge-bg);
 	color: var(--tag-badge-fg);
-	text-decoration: none;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
 	font-family: var(--font-heading);
-	font-size: 0.84rem;
+	font-size: 0.82rem;
 	font-weight: 600;
 	line-height: 1;
-	letter-spacing: -0.01em;
+	letter-spacing: -0.015em;
+	text-decoration: none;
 	transition:
 		transform 180ms ease,
 		box-shadow 180ms ease,
@@ -215,24 +324,25 @@ hr {
 .tag-badge:hover {
 	color: var(--tag-badge-fg);
 	transform: translateY(-1px);
-	box-shadow: 0 10px 20px -16px color-mix(in srgb, var(--tag-badge-fg) 60%, transparent);
-	filter: saturate(1.04);
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.65),
+		0 12px 22px -18px color-mix(in srgb, var(--tag-badge-fg) 60%, transparent);
+	filter: saturate(1.02);
 }
 
 .tag-badge--md {
-	padding: 0.42rem 0.82rem;
-	font-size: 0.9rem;
-	border-radius: 0.95rem;
+	padding: 0.48rem 0.92rem;
+	font-size: 0.88rem;
 }
 
 .tag-badge__count {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	min-width: 1.35rem;
-	padding: 0.18rem 0.38rem;
+	min-width: 1.4rem;
+	padding: 0.18rem 0.36rem;
 	border-radius: 999px;
-	background: color-mix(in srgb, var(--tag-badge-fg) 10%, white 70%);
+	background: color-mix(in srgb, var(--tag-badge-fg) 10%, white 74%);
 	color: color-mix(in srgb, var(--tag-badge-fg) 88%, black 12%);
 	font-size: 0.72rem;
 	font-weight: 700;
@@ -240,13 +350,17 @@ hr {
 }
 
 @media (max-width: 720px) {
+	body {
+		font-size: var(--font-body-size-mobile);
+	}
+
 	.tag-badge {
-		padding: 0.32rem 0.66rem;
-		font-size: 0.8rem;
+		padding: 0.36rem 0.72rem;
+		font-size: 0.79rem;
 	}
 
 	.tag-badge--md {
-		padding: 0.38rem 0.75rem;
-		font-size: 0.86rem;
+		padding: 0.42rem 0.82rem;
+		font-size: 0.84rem;
 	}
 }

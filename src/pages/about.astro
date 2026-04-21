@@ -1,17 +1,45 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
 ---
 
-<Layout
-	title="About"
-	description="About Kairong"
-	pubDate={new Date('2026-04-18')}
->
-	<p>
-		Hi, I'm Kairong.
-	</p>
-	<p>
-		This blog records my notes and experiments on distributed systems, programming, and engineering
-		workflows.
-	</p>
-</Layout>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`About | ${SITE_TITLE}`} description="About Kairong" />
+	</head>
+	<body>
+		<Header />
+		<main class="page-shell space-y-6">
+			<section class="surface-panel p-6 sm:p-8 lg:p-10">
+				<p class="eyebrow">About</p>
+				<div class="mt-3 space-y-4">
+					<h1 class="section-heading max-w-3xl">
+						A technical notebook for systems, tools, and research work.
+					</h1>
+					<p class="section-subtitle max-w-3xl">
+						Hi, I'm Kairong. This blog is where I keep the durable version of what I learn while
+						working on distributed systems, programming, engineering workflows, and academic writing.
+					</p>
+				</div>
+			</section>
+			<section class="surface-panel mx-auto max-w-3xl px-6 py-8 sm:px-10 sm:py-10">
+				<div class="prose-content">
+					<p>
+						I use this space as a long-term archive rather than a stream of short updates. When a note
+						ends up here, it is usually because I expect it to stay useful: a setup record, a design
+						pattern, a writing rule, a debugging trail, or a small piece of engineering taste that is
+						easy to forget.
+					</p>
+					<p>
+						Most posts are practical. They try to make technical work feel calmer, clearer, and more
+						repeatable.
+					</p>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

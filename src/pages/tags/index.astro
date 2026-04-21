@@ -27,35 +27,25 @@ const tags = [...tagCounts.entries()]
 <html lang="en">
 	<head>
 		<BaseHead title={`Tags | ${SITE_TITLE}`} description="Browse posts by tags" />
-		<style>
-			main {
-				max-width: 840px;
-			}
-			.page-subtitle {
-				margin: 0 0 1.4rem 0;
-				color: rgb(var(--gray));
-			}
-			.tag-list {
-				list-style: none;
-				padding: 0;
-				margin: 0;
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.6rem;
-			}
-			.tag-link {
-				display: flex;
-			}
-		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>Tags</h1>
-			<p class="page-subtitle">{tags.length} tags</p>
+		<main class="page-shell space-y-6">
+			<section class="surface-panel p-6 sm:p-8">
+				<p class="eyebrow">Taxonomy</p>
+				<div class="mt-3 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+					<div class="space-y-3">
+						<h1 class="section-heading">Tags</h1>
+						<p class="section-subtitle max-w-3xl">
+							Browse the archive through recurring topics, tooling clusters, and long-lived themes.
+						</p>
+					</div>
+					<span class="meta-pill">{tags.length} tags</span>
+				</div>
+			</section>
 			{
 				tags.length > 0 ? (
-					<ul class="tag-list">
+					<ul class="surface-panel flex list-none flex-wrap gap-3 p-6 sm:p-8">
 						{tags.map((item) => (
 							<li>
 								<TagBadge tag={item.tag} href={`/tags/${item.slug}/`} count={item.count} />
@@ -63,7 +53,7 @@ const tags = [...tagCounts.entries()]
 						))}
 					</ul>
 				) : (
-					<p>No tags yet.</p>
+					<section class="surface-panel p-6 text-muted sm:p-8">No tags yet.</section>
 				)
 			}
 		</main>

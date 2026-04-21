@@ -2,32 +2,26 @@
 const today = new Date();
 ---
 
-<footer>
-	&copy; {today.getFullYear()} LKRCharon. All rights reserved.
-	<div class="social-links">
-		<a href="https://github.com/LKRCharon" target="_blank" rel="noopener noreferrer">GitHub</a>
-		<a href="/rss.xml">RSS</a>
+<footer class="border-t border-line-soft/80">
+	<div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-end lg:justify-between lg:px-8">
+		<div class="space-y-2">
+			<p class="eyebrow">LKRCharon</p>
+			<p class="max-w-xl text-sm leading-6 text-muted">
+				Writing about distributed systems, programming, research workflows, and the small tools that
+				make serious work calmer.
+			</p>
+			<p class="text-sm text-subtle">&copy; {today.getFullYear()} LKRCharon. All rights reserved.</p>
+		</div>
+		<div class="flex flex-wrap gap-2">
+			<a
+				class="text-link-chip"
+				href="https://github.com/LKRCharon"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				GitHub
+			</a>
+			<a class="text-link-chip" href="/rss.xml">RSS</a>
+		</div>
 	</div>
 </footer>
-<style>
-	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: center;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 0.9rem;
-		margin-top: 1em;
-		font-size: 0.95rem;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
-	}
-</style>
