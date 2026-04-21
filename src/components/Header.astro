@@ -1,7 +1,6 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import { FONT_STYLE_OPTIONS, FONT_STYLE_STORAGE_KEY, FONT_STYLE_VALUES } from '../config/fontStyles';
 ---
 
 <header class="border-b border-line-soft/80 bg-canvas/90">
@@ -22,21 +21,6 @@ import { FONT_STYLE_OPTIONS, FONT_STYLE_STORAGE_KEY, FONT_STYLE_VALUES } from '.
 			</div>
 		</div>
 		<div class="ml-auto flex items-center gap-2">
-			<div class="relative">
-				<label class="sr-only" for="font-style-select">Font style</label>
-				<select
-					id="font-style-select"
-					class="h-10 rounded-xl border border-line-soft bg-white/84 px-3 pr-8 text-sm font-medium text-muted shadow-[0_10px_24px_-20px_rgba(31,41,55,0.28)] outline-none transition focus:border-accent/30 focus:text-text"
-					data-font-style-select
-					data-font-style-values={JSON.stringify(FONT_STYLE_VALUES)}
-				>
-					{
-						FONT_STYLE_OPTIONS.map((option) => (
-							<option value={option.value}>{option.label}</option>
-						))
-					}
-				</select>
-			</div>
 			<a
 				class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line-soft bg-white/84 text-muted shadow-[0_10px_24px_-20px_rgba(31,41,55,0.28)] transition hover:-translate-y-0.5 hover:text-text"
 				href="https://github.com/LKRCharon"
@@ -59,32 +43,3 @@ import { FONT_STYLE_OPTIONS, FONT_STYLE_STORAGE_KEY, FONT_STYLE_VALUES } from '.
 		</div>
 	</nav>
 </header>
-<script
-	is:inline
-	define:vars={{ fontStyleStorageKey: FONT_STYLE_STORAGE_KEY, fontStyleValues: FONT_STYLE_VALUES }}
->
-	(() => {
-		const defaultValue = 'default';
-		const select = document.querySelector('[data-font-style-select]');
-		if (!select) return;
-
-		const apply = (rawValue) => {
-			const next = fontStyleValues.includes(rawValue) ? rawValue : defaultValue;
-			document.documentElement.setAttribute('data-font-style', next);
-			select.value = next;
-			try {
-				localStorage.setItem(fontStyleStorageKey, next);
-			} catch {
-				// noop
-			}
-		};
-
-		const current = document.documentElement.getAttribute('data-font-style') || defaultValue;
-		apply(current);
-
-		select.addEventListener('change', (event) => {
-			const value = event.target && 'value' in event.target ? event.target.value : defaultValue;
-			apply(value);
-		});
-	})();
-</script>

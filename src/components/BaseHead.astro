@@ -3,7 +3,7 @@
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import { SITE_TITLE } from '../consts';
-import { FONT_STYLE_STORAGE_KEY, FONT_STYLE_VALUES } from '../config/fontStyles';
+import { DEFAULT_FONT_STYLE } from '../config/fontStyles';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
@@ -22,16 +22,9 @@ const imageURL = image ? new URL(image.src, Astro.url) : null;
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="theme-color" content="#f6f7fb" />
-<script is:inline define:vars={{ fontStyleStorageKey: FONT_STYLE_STORAGE_KEY, fontStyleValues: FONT_STYLE_VALUES }}>
+<script is:inline define:vars={{ defaultFontStyle: DEFAULT_FONT_STYLE }}>
 	(() => {
-		const defaultValue = 'default';
-		try {
-			const raw = localStorage.getItem(fontStyleStorageKey);
-			const next = raw && fontStyleValues.includes(raw) ? raw : defaultValue;
-			document.documentElement.setAttribute('data-font-style', next);
-		} catch {
-			document.documentElement.setAttribute('data-font-style', defaultValue);
-		}
+		document.documentElement.setAttribute('data-font-style', defaultFontStyle);
 	})();
 </script>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

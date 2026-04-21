@@ -16,23 +16,32 @@ const style = getTagBadgeStyle(tag);
 
 <a
 	class:list={[
-		'inline-flex items-center gap-2 rounded-full border border-gray-950/10 bg-white text-gray-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] transition hover:border-gray-950/15 hover:bg-gray-50 hover:text-gray-950',
-		size === 'md' ? 'px-3 py-1.5 text-sm/6 font-medium' : 'px-2.5 py-1 text-xs/6 font-medium',
+		'inline-flex items-center justify-center gap-2 border border-gray-950/10 bg-white text-gray-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] transition hover:border-gray-950/15 hover:bg-gray-50 hover:text-gray-950',
+		size === 'md'
+			? 'min-h-10 rounded-full px-3.5 text-[0.95rem] font-medium'
+			: 'min-h-9 rounded-full px-3 text-[0.84rem] font-medium',
 	]}
 	href={href}
 	style={style}
 >
 	<span
 		class:list={[
-			'rounded-full bg-[var(--tag-dot-color)]',
-			size === 'md' ? 'size-2.5' : 'size-1.5',
+			'shrink-0 self-center rounded-full bg-[var(--tag-dot-color)]',
+			size === 'md' ? 'size-2.5' : 'size-2',
 		]}
 		aria-hidden="true"
 	></span>
-	<span class="whitespace-nowrap text-current">{label}</span>
+	<span
+		class:list={[
+			'inline-flex items-center self-center whitespace-nowrap leading-none tracking-[-0.02em] text-current',
+			size === 'md' ? 'translate-y-[-0.5px]' : 'translate-y-[-0.25px]',
+		]}
+	>
+		{tag}
+	</span>
 	{
 		count !== undefined && (
-			<span class="rounded-full bg-gray-950/5 px-1.5 py-0.5 text-[0.7rem] font-semibold text-gray-600">
+			<span class="inline-flex min-h-5 items-center rounded-full bg-gray-950/5 px-1.5 py-0.5 text-[0.7rem] font-semibold text-gray-600">
 				{count}
 			</span>
 		)
